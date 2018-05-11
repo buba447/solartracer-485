@@ -1,11 +1,5 @@
 Exar USB Serial Driver
 ======================
-Version 1C  2017/1/11
-        Add the 9-bit mode support.
-        Disbale the debug messages.
-Version 1B, 11/6/2015
-Fixed Bug: The conditional logic to support kernel 3.9 was incorrect(line 396 in xr_usb_serial_common.c). 
-
 Version 1A, 1/9/2015
 
 This driver will work with any USB UART function in these Exar devices:
@@ -26,6 +20,15 @@ Installation
 	# make
 	# insmod ./xr_usb_serial_common.ko
 
+* Alternativley install via DKMS
+	# cp -a ../xr_usb_serial_common-1a /usr/src/
+	# dkms add -m xr_usb_serial_common -v 1a
+	# dkms build -m xr_usb_serial_common -v 1a
+	# dkms install -m xr_usb_serial_common -v 1a
+
+* Ensure that thecdc-acm module is not loaded (assumig that it is not needed)
+	# echo blacklist cdc-acm > /etc/modprobe.d/blacklist-cdc-acm.conf 
+	# update-initramfs -u
 
 * Plug the device into the USB host.  You should see up to four devices created,
   typically /dev/ttyXRUSB[0-3].

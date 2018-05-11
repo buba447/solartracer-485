@@ -7,12 +7,11 @@ You need RS-485 adapter for communication. The first generation controller
 used RS-232 and a different protocol. see https://github.com/xxv/tracer.
 
 This repo is a fork of [epsolar-tracer](https://github.com/kasbert/epsolar-tracer/)
-The epsolar-tracer repo had a few bugs and an outdated linux driver that didnt work with the Raspberry Pi 3.
 
 Linux driver for Exar USB UART
 ------------------------------
 Heres how to install the driver for a usb to rs-485 similar to the one [found here]()
-The [xr_usb_serial_common](https://github.com/buba447/solartracer-485/xr_usb_serial_common_lnx-3.6-and-newer-pak/) directory contains the makefile and instructions that will compile properly on Rasbian OS on a raspberry pi 3. Before compiling be sure to install the linux headers with 
+The [xr_usb_serial_common](https://github.com/buba447/solartracer-485/xr_usb_serial_common-1a/) directory contains the makefile and instructions that will compile properly on Rasbian OS on a raspberry pi 3. Before compiling be sure to install the linux headers with
 `sudo apt-get install raspberrypi-kernel-headers`
 
 After installing the headers be sure to `sudo bundle` then `sudo make`.
@@ -44,15 +43,7 @@ See for [windows capture](archive/epsolar.txt) for some extra commands.
 
 Python module
 -------------
-Uses modbus library (https://github.com/bashwork/pymodbus)  
-Example output
-```
-# python info.py 
-Manufacturer: 'EPsolar Tech co., Ltd'
-Model: 'Tracer2215BN'
-Version: 'V02.05+V07.12'
-Charging equipment rated input voltage = 150.0V
-Charging equipment rated input voltage = 150.0V
-Charging equipment rated input current = 20.0A
-...
-```
+The file `logsolar.py` will query the solar controller for relevant data and log it to mysql. You will need to update the file to point to your mysql db.
+Uses modbus library (https://github.com/bashwork/pymodbus)  and mysqldb
+
+
