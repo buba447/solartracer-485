@@ -1,0 +1,103 @@
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #dc5945;
+
+$title-color:       rgba(255, 255, 255, 0.7);
+$moreinfo-color:    rgba(255, 255, 255, 0.5);
+$tick-color:        rgba(0, 0, 0, 0.4);
+
+
+// ----------------------------------------------------------------------------
+// Widget-graph styles
+// ----------------------------------------------------------------------------
+.widget-rickshawgraph {
+
+  background-color: $background-color;
+  position: relative;
+
+  .rickshaw_graph {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+
+  svg {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+  }
+
+  .title, .value {
+    position: relative;
+    z-index: 99;
+  }
+
+  .title {
+    color: $title-color;
+  }
+
+  .more-info {
+    color: $moreinfo-color;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 0;
+  }
+
+  .x_tick {
+    position: absolute;
+    bottom: 0;
+    .title {
+      font-size: 20px;
+      color: $tick-color;
+      opacity: 0.5;
+      padding-bottom: 3px;
+    }
+  }
+
+  .y_ticks {
+    font-size: 20px;
+    fill: $tick-color;
+    text {
+      opacity: 0.5;
+    }
+  }
+
+  .domain {
+    display: none;
+  }
+
+  .rickshaw_legend {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    font-size: 15px;
+    height: 20px;
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      text-align: center;
+    }
+
+    ul li {
+      display: inline;
+    }
+
+    .swatch {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-left: 5px;
+    }
+
+    .label {
+      display: inline-block;
+      margin-left: 5px;
+    }
+  }
+
+}
