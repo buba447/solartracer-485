@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import minimalmodbus
 import datetime
 import MySQLdb as mdb
