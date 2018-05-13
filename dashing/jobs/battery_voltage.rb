@@ -6,7 +6,7 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
   db = Mysql2::Client.new(:host => "localhost", :username => "buba", :password => "buba", :database => "van_solar" )
 
   # Mysql query
-  voltageSql = "select solar_voltage, UNIX_TIMESTAMP(date) FROM solar_voltage WHERE date >= NOW() - INTERVAL 1 DAY"
+  voltageSql = "select battery_voltage, UNIX_TIMESTAMP(date) FROM battery_voltage WHERE date >= NOW() - INTERVAL 1 DAY"
 
   # Execute the query
   voltageResults = db.query(voltageSql)
@@ -15,12 +15,12 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
   voltageItems = voltageResults.map do |row|
     row = {
       :x => row['UNIX_TIMESTAMP(date)'],
-      :y => row['solar_voltage']
+      :y => row['battery_voltage']
     }
   end
 
   # Mysql query
-  ampsSql = "select solar_amps, UNIX_TIMESTAMP(date) FROM solar_amps WHERE date >= NOW() - INTERVAL 1 DAY"
+  ampsSql = "select battery_amps, UNIX_TIMESTAMP(date) FROM battery_amps WHERE date >= NOW() - INTERVAL 1 DAY"
 
   # Execute the query
   ampsResults = db.query(ampsSql)
@@ -29,11 +29,11 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
   ampItems = ampsResults.map do |row|
     row = {
       :x => row['UNIX_TIMESTAMP(date)'],
-      :y => row['solar_amps']
+      :y => row['battery_amps']
     }
   end
 
   # Update the List widget
-  send_event('pv_power', points: [voltageItems, ampItems])
+  send_event('bat_power', points: [voltageItems, ampItems])
 
 end
