@@ -13,7 +13,7 @@ SCHEDULER.every '1m', :first_in => 0 do |job|
 
   # tempItems to List widget, so map to :label and :value
   items = results.map do |row|
-    temp = (row['temperature'] * 9.0/5.0) + 32
+    temp = (row['temperature'] * 1.8) + 32
     row = {
       :x => row['UNIX_TIMESTAMP(date)'],
       :y => temp

@@ -16,7 +16,7 @@ def readRegister(register):
 	instrument.mode = minimalmodbus.MODE_RTU
 
 	try:
-		reading = instrument.read_register(address, 2, 4)
+		reading = instrument.read_register(int(register, 16), 2, 4)
 		return reading
 	except IOError:
 		return 0
