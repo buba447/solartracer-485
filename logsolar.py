@@ -55,7 +55,7 @@ readNumberAndSaveToTable(instrument, con, 0x3105, "battery_amps")
 readNumberAndSaveToTable(instrument, con, 0x310D, "load_amps")
 
 #Read Battery Temperature
-readNumberAndSaveToTable(instrument, con, 0x331B, "temperature")
+readNumberAndSaveToTable(instrument, con, 0x311B, "temperature")
 
 #Read Daily Use
 readNumberAndSaveToTable(instrument, con, 0x3304, "daily_kw_used")

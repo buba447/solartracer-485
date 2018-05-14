@@ -10,8 +10,8 @@ This repo is a fork of [epsolar-tracer](https://github.com/kasbert/epsolar-trace
 
 Linux driver for Exar USB UART
 ------------------------------
-Heres how to install the driver for a usb to rs-485 similar to the one [found here]()
-The [xr_usb_serial_common](https://github.com/buba447/solartracer-485/xr_usb_serial_common-1a/) directory contains the makefile and instructions that will compile properly on Rasbian OS on a raspberry pi 3. Before compiling be sure to install the linux headers with
+Heres how to install the driver for a usb to rs-485 similar to the one [found here](https://www.amazon.com/gp/product/B016RU8JUY/ref=oh_aui_search_detailpage?ie=UTF8&psc=1)
+The [xr_usb_serial_common](xr_usb_serial_common-1a/) directory contains the makefile and instructions that will compile properly on Rasbian OS on a raspberry pi 3. Before compiling be sure to install the linux headers with
 `sudo apt-get install raspberrypi-kernel-headers`
 
 After installing the headers be sure to `sudo bundle` then `sudo make`.
@@ -39,11 +39,32 @@ Reboot and enjoy!
 Protocol
 --------
 [Protocol](http://www.solar-elektro.cz/data/dokumenty/1733_modbus_protocol.pdf)
-See for [windows capture](archive/epsolar.txt) for some extra commands.
 
 Python module
 -------------
-The file `logsolar.py` will query the solar controller for relevant data and log it to mysql. You will need to update the file to point to your mysql db.
-Uses modbus library (https://github.com/bashwork/pymodbus)  and mysqldb
+A simple script found in [dashing/jobs](dashing/jobs/getRegistery.py) will read a specific register from the solar charger. You can use this to test that your driver is working. Before running be sure to install the [Minimal Modbus](https://github.com/pyhys/minimalmodbus) python library.
+Run the script like so:
+`python getRegister.py 0x3100`
+The script will return 0 if there is any kind of error.
 
+The file `logsolar.py` will query the solar controller for relevant data and log it to a mysql database. You will need to update the file to point to your mysql db.
+Uses [Minimal Modbus](https://github.com/pyhys/minimalmodbus) and mysqldb libraries
 
+Setting up a cron job to run this script regularly is advisable if you intend to setup a dashboard.
+To set up a cron job:
+First make `logsolar.py` and executable file:
+`sudo chmod +x logsolar.py`
+
+Now add the cron job:
+`crontab -e`
+`*/5 * * * * /PATHTOREPO/logsolar.py`
+
+Dashing.io Dashboard
+--------------------
+![Img](img/IMG_2011.png)
+The Dashing folder contains everything needed to setup a dashboard to monitor realtime and historical solar charging data. Install dashing and created a new project, then copy the files from the dashing folder into your new dashing project. The path to the phython script in /jobs/ will need to be changed.
+
+Starting Raspberry Pi as a Local Network + Web Service
+------------------------------------------------------
+
+https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
