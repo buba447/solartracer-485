@@ -68,3 +68,28 @@ Starting Raspberry Pi as a Local Network + Web Service
 ------------------------------------------------------
 
 https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md
+Actually this one
+https://github.com/SurferTim/documentation/blob/6bc583965254fa292a470990c40b145f553f6b34/configuration/wireless/access-point.md
+
+[From](https://www.raspberrypi.org/forums/viewtopic.php?t=208664)
+To set up an isolated AP:
+Follow the instructions here: https://www.raspberrypi.org/documentati ... s-point.md up to but not including "ADD ROUTING AND MASQUERADE" section.
+Comment out any "NETWORK={" entries in /etc/wpa_supplicant/wpa_supplicant.conf
+Cold reboot
+
+To disable the isolated AP to contact the internet for apt-get updates etc:
+In /etc/default/hostapd set DAEMON_CONF=""
+Reinstate the "NETWORK={" entries in /etc/wpa_supplicant/wpa_supplicant.conf for your home network ssid etc
+Comment out the AP interface IP details in /etc/dhcpcd.conf
+Cold Reboot reboot
+
+https://raspberrypi.stackexchange.com/questions/37885/raspberry-pi-port-forwarding-with-nodejs-server
+
+
+Starting Dashing on boot
+
+https://gist.github.com/gregology/5313326
+
+changing hostname
+https://www.howtogeek.com/167195/how-to-change-your-raspberry-pi-or-other-linux-devices-hostname/
+
